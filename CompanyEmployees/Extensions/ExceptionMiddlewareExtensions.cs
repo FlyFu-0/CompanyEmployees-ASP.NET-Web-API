@@ -28,6 +28,6 @@ public static class ExceptionMiddlewareExtensions
 					}.ToString());
 				}
 			}
-			));
+		));
 	}
 }

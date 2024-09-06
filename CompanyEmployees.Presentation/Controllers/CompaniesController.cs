@@ -15,15 +15,9 @@ public class CompaniesController : ControllerBase
 	[HttpGet]
 	public IActionResult GetCompanies()
 	{
-		try
-		{
-			var companies = _services.CompanyService.GetAllCompanies(false);
+		throw new Exception("Exception");
+		var companies = _services.CompanyService.GetAllCompanies(false);
 
-			return Ok(companies);
-		}
-		catch
-		{
-			return StatusCode(500, "Internal server error");
-		}
+		return Ok(companies);
 	}
 }
