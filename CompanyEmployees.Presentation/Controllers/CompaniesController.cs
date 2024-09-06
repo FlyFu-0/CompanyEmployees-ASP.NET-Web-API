@@ -23,7 +23,7 @@ public class CompaniesController : ControllerBase
 	[HttpGet("{id:guid}")]
 	public IActionResult GetCompany(Guid id)
 	{
-		var company = _services.CompanyService.GetCompany(id, false);
+		var company = _services.CompanyService.GetCompany(id, trackChanges: false);
 		return Ok(company);
 	}
 }
