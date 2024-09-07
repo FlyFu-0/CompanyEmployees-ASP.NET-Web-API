@@ -15,7 +15,7 @@ public class CompaniesController : ControllerBase
 	[HttpGet]
 	public IActionResult GetCompanies()
 	{
-		var companies = _services.CompanyService.GetAllCompanies(false);
+		var companies = _services.CompanyService.GetAllCompanies(trackChanges: false);
 
 		return Ok(companies);
 	}
