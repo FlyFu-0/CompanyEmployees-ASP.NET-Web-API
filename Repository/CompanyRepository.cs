@@ -1,6 +1,8 @@
 ﻿using Contracts;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using Repository.Extensions;
+using Shared.RequestFeatures;
 
 namespace Repository;
 
@@ -11,10 +13,9 @@ public class CompanyRepository : RepositoryBase<Company>, ICompanyRepository
 	{
 	}
 
-	//TODO: Get all entities - bad idea
-	public async Task<IEnumerable<Company>> GetAllCompaniesAsync(bool trackChanges)
+	public async Task<IEnumerable<Company>> GetAllCompaniesAsync(CompanyParametrs companyParametrs, bool trackChanges)
 		=> await FindAll(trackChanges)
-			.OrderBy(c => c.Name)
+			.Sort(companyParametrs.OrderBy)
 			.ToListAsync();
 
 	public async Task<Company> GetCompanyAsync(Guid companyId, bool trackChanges)

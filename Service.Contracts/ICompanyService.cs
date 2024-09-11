@@ -1,10 +1,11 @@
 ﻿using Shared.DataTransferObjects;
+using Shared.RequestFeatures;
 
 namespace Service.Contracts;
 
 public interface ICompanyService
 {
-	Task<IEnumerable<CompanyDto>> GetAllCompaniesAsync(bool trackChanges);
+	Task<IEnumerable<CompanyDto>> GetAllCompaniesAsync(CompanyParametrs companyParametrs, bool trackChanges);
 
 	Task<CompanyDto> GetCompanyAsync(Guid id, bool trackChanges);
 
