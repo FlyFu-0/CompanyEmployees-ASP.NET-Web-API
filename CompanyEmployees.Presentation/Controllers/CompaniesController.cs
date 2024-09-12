@@ -16,7 +16,7 @@ public class CompaniesController : ControllerBase
 	public CompaniesController(IServiceManager services)
 		=> _service = services;
 
-	[HttpGet]
+	[HttpGet(Name = "GetCompanies")]
 	public async Task<IActionResult> GetCompanies([FromQuery] CompanyParametrs companyParametrs)
 	{
 		var companies = await _service.CompanyService.GetAllCompaniesAsync(companyParametrs, trackChanges: false);
@@ -31,7 +31,7 @@ public class CompaniesController : ControllerBase
 		return Ok(company);
 	}
 
-	[HttpPost]
+	[HttpPost(Name = "CreateCompany")]
 	[ServiceFilter(typeof(ValidationFilterAttribute))]
 	public async Task<IActionResult> CreateCompany([FromBody] CompanyForCreationDto company)
 	{
@@ -72,5 +72,13 @@ public class CompaniesController : ControllerBase
 		await _service.CompanyService.UpdateCompanyAsync(id, company, trackChanges: true);
 
 		return NoContent();
+	}
+
+	[HttpOptions]
+	public IActionResult GetCompaniesOptions()
+	{
+		Response.Headers.Add("Allow", "GET, OPTIONS, POST");
+
+		return Ok();
 	}
 }
