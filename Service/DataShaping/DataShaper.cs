@@ -4,6 +4,7 @@ using System.Reflection;
 
 namespace Service.DataShaping;
 
+//Work with XML, but ugly output
 public class DataShaper<T> : IDataShaper<T> where T : class
 {
 	public PropertyInfo[] Properties { get; set; }
