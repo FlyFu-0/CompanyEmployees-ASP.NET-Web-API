@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using CompanyEmployees.Extensions;
 using CompanyEmployees.Presentation.ActionFilters;
 using CompanyEmployees.Utility;
@@ -25,6 +26,12 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.ConfigureVersioning();
 
+<<<<<<< Updated upstream
+=======
+builder.Services.ConfigureResponceCaching();
+builder.Services.ConfigureHttpCacheHeaders();
+
+>>>>>>> Stashed changes
 builder.Services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
 builder.Services.AddScoped<IEmployeeLinks, EmployeeLinks>();
 
@@ -47,6 +54,10 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 builder.Services.AddScoped<ValidationFilterAttribute>();
 builder.Services.AddScoped<ValidateMediaTypeAttribute>();
 
+builder.Services.AddMemoryCache();
+builder.Services.ConfigureRateLimitingOptions();
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 var logger = app.Services.GetRequiredService<ILoggerManager>();
@@ -62,7 +73,13 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 	ForwardedHeaders = ForwardedHeaders.All
 });
 
+app.UseIpRateLimiting();
 app.UseCors("CorsPolicy");
+<<<<<<< Updated upstream
+=======
+app.UseResponseCaching();
+app.UseHttpCacheHeaders();
+>>>>>>> Stashed changes
 
 app.UseAuthorization();
 
