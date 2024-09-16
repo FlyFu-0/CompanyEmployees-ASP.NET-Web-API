@@ -26,14 +26,14 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.ConfigureVersioning();
 
-<<<<<<< Updated upstream
-=======
 builder.Services.ConfigureResponceCaching();
 builder.Services.ConfigureHttpCacheHeaders();
 
->>>>>>> Stashed changes
 builder.Services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
 builder.Services.AddScoped<IEmployeeLinks, EmployeeLinks>();
+
+builder.Services.AddAuthentication();
+builder.Services.ConfigureIdentity();
 
 builder.Services.AddControllers(config =>
 {
@@ -75,12 +75,10 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 
 app.UseIpRateLimiting();
 app.UseCors("CorsPolicy");
-<<<<<<< Updated upstream
-=======
 app.UseResponseCaching();
 app.UseHttpCacheHeaders();
->>>>>>> Stashed changes
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -11,10 +11,6 @@ namespace CompanyEmployees.Presentation.Controllers;
 [ApiVersion("1.0")]
 [Route("api/companies")]
 [ApiController]
-<<<<<<< Updated upstream
-=======
-//[ResponseCache(CacheProfileName = "120SecondsDuration")]
->>>>>>> Stashed changes
 public class CompaniesController : ControllerBase
 {
 	private readonly IServiceManager _service;
