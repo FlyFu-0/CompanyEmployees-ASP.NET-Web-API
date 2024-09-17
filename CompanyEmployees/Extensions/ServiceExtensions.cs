@@ -177,8 +177,29 @@ public static class ServiceExtensions
 	{
 		services.AddSwaggerGen(s =>
 		{
-			s.SwaggerDoc("v1", new OpenApiInfo { Title = "My Api", Version = "v1" });
+			s.SwaggerDoc("v1", new OpenApiInfo
+			{
+				Title = "My Api",
+				Version = "v1",
+				Description = "CompanyEmployees API by FlyFu-0",
+				TermsOfService = new Uri("https://example.com/terms"),
+				Contact = new OpenApiContact
+				{
+					Name = "John Doe",
+					Email = "John.Doe@gmail.com",
+					Url = new Uri("https://x.com/johndoe"),
+				},
+				License = new OpenApiLicense
+				{
+					Name = "CompanyEmployees API LICX",
+					Url = new Uri("https://example.com/license"),
+				}
+			});
 			s.SwaggerDoc("v2", new OpenApiInfo { Title = "My Api", Version = "v2" });
+
+			var xmlFile = $"{typeof(Presentation.AssemblyReference).Assembly.GetName().Name}.xml";
+			var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+			s.IncludeXmlComments(xmlPath);
 
 			s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
 			{
