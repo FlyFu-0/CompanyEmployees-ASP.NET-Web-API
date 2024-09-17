@@ -60,6 +60,8 @@ builder.Services.AddMemoryCache();
 builder.Services.ConfigureRateLimitingOptions();
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.ConfigureSwagger();
+
 var app = builder.Build();
 
 var logger = app.Services.GetRequiredService<ILoggerManager>();
@@ -84,6 +86,13 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseSwagger();
+app.UseSwaggerUI(s =>
+{
+	s.SwaggerEndpoint("/swagger/v1/swagger.json", "My Api v1");
+	s.SwaggerEndpoint("/swagger/v2/swagger.json", "My Api v2");
+});
 
 app.Run();
 
